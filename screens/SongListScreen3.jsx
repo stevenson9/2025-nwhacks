@@ -74,7 +74,7 @@ const SongListScreen = ({navigation}) => {
       console.error('error fill playlist storage', err)
     }
   }
-const generateLink = async (token, playlistId) => {
+    const generateLink = async (token, playlistId) => {
     try {
       const response = await axios.get(`https://api.spotify.com/v1/playlists/${playlistId}`, {
         headers: {
@@ -85,6 +85,7 @@ const generateLink = async (token, playlistId) => {
     } catch(err) {
       console.error('error in link gen', err)
     }
+}
 
   const initialOffset = 30; // For example, scroll down by 30px initially
 
@@ -247,7 +248,7 @@ const generateLink = async (token, playlistId) => {
             { transform: [{ scale }] }, // Apply the interpolated color to the button
           ]}
         >
-          <Text style={styles.buttonText}>Check out Playlist</Text>
+          <Text onPress={()=>createPlaylist()} style={styles.buttonText}>Check out Playlist</Text>
         </Animated.View>
       </TouchableWithoutFeedback>
 
