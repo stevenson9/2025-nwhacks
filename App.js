@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import { StyleSheet, View } from "react-native";
 
 import { NavigationContainer } from "@react-navigation/native";
@@ -9,10 +10,18 @@ import RecordVideoScreen from "./screens/RecordVideoScreen";
 import MoodScreen from "./screens/MoodScreen";
 
 const Stack = createStackNavigator();
+=======
+import { StatusBar } from "expo-status-bar";
+import { StyleSheet, Text, View } from "react-native";
+import MainNavigation from "./screens/MainNavigation";
+import LoginScreen from "./screens/LoginScreen";
+import SongListScreen from "./screens/SongListScreen";
+>>>>>>> eb0a8c16786ba45489b5f5552ff1ffd08e97419e
 
 export default function App() {
   return (
     /* <StatusBar style="auto" /> */
+<<<<<<< HEAD
     <View style={styles.container}>
       <NavigationContainer>
         <Stack.Navigator>
@@ -33,3 +42,10 @@ const styles = StyleSheet.create({
     color: "#8075FF",
   },
 });
+=======
+    // <MainNavigation />
+    // <LoginScreen />
+    <SongListScreen />
+  );
+}
+>>>>>>> eb0a8c16786ba45489b5f5552ff1ffd08e97419e
