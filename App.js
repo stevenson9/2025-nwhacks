@@ -16,14 +16,14 @@ export default function App() {
     /* <StatusBar style="auto" /> */
     <View style={styles.container}>
       <NavigationContainer>
-      <Stack.Navigator>
-        {/* <Stack.Screen name="Login" component={LoginScreen} /> */}
-        <Stack.Screen name="MakePlaylist" component={MakePlaylistScreen} />
-        <Stack.Screen name="RecordVideo" component={RecordVideoScreen} />
-        <Stack.Screen name="Mood" component={MoodScreen} />
-        <Stack.Screen name="Time" component={TimeScreen} />
-      </Stack.Navigator>
-    </NavigationContainer>
+        <Stack.Navigator>
+          <Stack.Screen name="Login" component={LoginScreen} />
+          <Stack.Screen name="MakePlaylist" component={MakePlaylistScreen} />
+          <Stack.Screen name="RecordVideo" component={RecordVideoScreen} />
+          <Stack.Screen name="Mood" component={MoodScreen} />
+          <Stack.Screen name="Time" component={TimeScreen} />
+        </Stack.Navigator>
+      </NavigationContainer>
     </View>
   );
 }
