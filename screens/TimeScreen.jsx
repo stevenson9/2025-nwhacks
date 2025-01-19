@@ -1,9 +1,9 @@
 import React from "react";
 import { useState, useEffect } from "react";
-import { View, Text, Alert, StyleSheet, Button } from "react-native";
+import { View, Text, StyleSheet, Button } from "react-native";
 import DateTimePicker from "@react-native-community/datetimepicker";
 import * as Location from "expo-location";
-import { set } from "firebase/database";
+import Circles from "../components/Circles";
 
 const TimeScreen = ({ navigation }) => {
   const [date, setDate] = useState(new Date());
@@ -18,6 +18,10 @@ const TimeScreen = ({ navigation }) => {
     setDate(currentDate);
   };
 
+  React.useLayoutEffect(() => {
+    navigation.setOptions({ headerShown: false });
+  }, [navigation]);
+
   useEffect(() => {
     async function getCurrentLocation() {
       let { status } = await Location.requestForegroundPermissionsAsync();
@@ -30,11 +34,10 @@ const TimeScreen = ({ navigation }) => {
       setLocation(location);
 
       setLatitude(location.coords.latitude);
-    setLongitude(location.coords.longitude);
+      setLongitude(location.coords.longitude);
     }
 
     getCurrentLocation();
-    
   }, []);
   let text = "Waiting...";
   if (errorMsg) {
@@ -46,82 +49,92 @@ const TimeScreen = ({ navigation }) => {
   }
 
   return (
-    <View style={styles.container}>
-      <View style={styles.timeInstructions}>
-        <Text style={styles.title}>Time</Text>
-        <Text style={styles.description}>The current time is</Text>
-        <View style={styles.time}>
-          <DateTimePicker
-            testID="dateTimePicker"
-            value={date}
-            mode="time"
-            is24Hour={true}
-            onChange={onChange}
-          />
+    <View style={styles.background}>
+      <Circles />
+      <View style={styles.container}>
+        <View style={styles.timeInstructions}>
+          <Text style={styles.title}>Time</Text>
+          <Text style={styles.description}>The current time is:</Text>
+          <View style={styles.time}>
+            <DateTimePicker
+              testID="dateTimePicker"
+              value={date}
+              mode="time"
+              is24Hour={true}
+              onChange={onChange}
+              style={styles.dateTimePicker}
+            />
+          </View>
         </View>
-      </View>
 
-      <View style={styles.weatherInstructions}>
-        <Text style={styles.title}>Weather</Text>
-        <Text style={styles.description}>The current weather is</Text>
-        <View style={styles.time}>
-          <Text>
-            {longitude}
-            {latitude}
+        <View style={styles.weatherInstructions}>
+          <Text style={styles.title}>Weather</Text>
+          <Text style={styles.description}>The current weather is:</Text>
+          <View style={styles.time}>
+            <Text>
+              {longitude}
+              {latitude}
+            </Text>
+          </View>
+        </View>
+        <View style={styles.next}>
+          <Text
+            style={styles.button}
+            onPress={() => {
+              navigation.navigate("SongList");
+            }}
+          >
+            Continue
           </Text>
         </View>
-      </View>
-      <View style={styles.next}>
-        <Button
-          title="Next"
-          onPress={() => {
-            navigation.navigate("SongList");
-          }}
-        />
       </View>
     </View>
   );
 };
 
 const styles = StyleSheet.create({
-  container: {
+  background: {
     flex: 1,
     alignContent: "center",
-    backgroundColor: "#F8F0FB",
+    backgroundColor: "#121212",
+    opacity: 0.95,
+  },
+
+  container: {
+    flex: 1,
+    position: "absolute",
+    bottom: "20%",
+    left: "10%",
+    opacity: 0.95,
   },
 
   title: {
     fontSize: 40,
-    color: "#211A1D",
+    color: "white",
     fontWeight: "bold",
   },
 
   description: {
     marginTop: 10,
     fontSize: 20,
-    color: "#211A1D",
+    color: "white",
   },
 
   timeInstructions: {
-    flex: 3,
-    marginTop: 75,
-    marginLeft: 50,
+    marginTop: 25,
   },
 
   weatherInstructions: {
-    flex: 4,
     marginTop: 25,
-    marginLeft: 50,
   },
 
   time: {
-    width: 300, // Adjust width as per your needs
-    height: 50, // Adjust height as per your needs
-    marginTop: 30,
-    justifyContent: "center",
     alignItems: "center",
+    color: "white",
+    borderRadius: 10,
+    margin: 10,
+    backgroundColor: "grey", // Neutral background for contrast
   },
-
   select: {
     flexDirection: "row",
     justifyContent: "space-between",
@@ -131,20 +144,27 @@ const styles = StyleSheet.create({
   },
 
   next: {
-    flex: 1,
-    alignItems: "center",
+    marginTop: 25,
+    color: "white",
   },
 
   button: {
     color: "black",
-    fontSize: 40,
+    fontWeight: 6,
+    fontSize: 18,
+    textAlign: "center",
+    margin: 10,
+    borderWidth: 5,
+    borderRadius: 20,
+    borderColor: "white",
+    backgroundColor: "white",
+    height: 30,
+    width: 320,
   },
-
-  selected: {
-    fontSize: 40,
-    borderWidth: 4,
-    borderColor: "#211A1D",
-    borderRadius: 50,
+  dateTimePicker: {
+    borderRadius: 8,
+    fontSize: 48,
+    position: "relative",
   },
 });
 
