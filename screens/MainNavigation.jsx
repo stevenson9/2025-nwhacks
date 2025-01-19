@@ -4,7 +4,7 @@ import LoginScreen from "./LoginScreen";
 import TabNavigator from "./TabNavigator";
 
 const MainNavigation = () => {
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState(true);
 
   return (
     <NavigationContainer>

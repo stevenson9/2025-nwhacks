@@ -11,6 +11,7 @@ const TabNavigator = () => {
   return (
     <Tab.Navigator
       screenOptions={({ route }) => ({
+        headerShown: false,
         tabBarIcon: ({ focused, color, size }) => {
           let iconName;
 
@@ -24,13 +25,13 @@ const TabNavigator = () => {
 
           return <Ionicons name={iconName} size={size} color={color} />;
         },
-        tabBarActiveTintColor: "tomato",
+        tabBarActiveTintColor: "#264653",
         tabBarInactiveTintColor: "gray",
       })}
     >
+      <Tab.Screen name="Friends" component={FriendsScreen} />
       <Tab.Screen name="Upload" component={UploadScreen} />
       <Tab.Screen name="Profile" component={ProfileScreen} />
-      <Tab.Screen name="Friends" component={FriendsScreen} />
     </Tab.Navigator>
   );
 };
